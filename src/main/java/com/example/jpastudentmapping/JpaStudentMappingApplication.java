@@ -20,9 +20,5 @@ public class JpaStudentMappingApplication implements CommandLineRunner {
     public void run(String... args) throws Exception {
 
         service.createDb();
-        JPAUtil.checkData("select * from province");
-        JPAUtil.checkData("select * from student");
-        JPAUtil.checkData("select * from subject");
-        JPAUtil.checkData("select * from student_subject");
     }
 }

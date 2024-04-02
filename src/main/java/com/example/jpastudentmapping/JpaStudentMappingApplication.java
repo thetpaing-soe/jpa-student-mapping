@@ -33,10 +33,11 @@ public class JpaStudentMappingApplication implements CommandLineRunner {
 //
 //        Example<Student> studentExample = Example.of(s);
 //        System.out.println(service.studentByExample(studentExample));
-        System.out.println("Highest Mark::");
-        System.out.println(service.highestMark());
+        System.out.println("Highest Mark Student::");
+//        System.out.println(service.highestMark());
 //        service.findStudentHighestMarkBySubject("Java").forEach(System.out::println);
-        service.findStudentInfo("Java").forEach(System.out::println);
+//        service.findStudentInfo("Java").forEach(System.out::println);
+        System.out.println(service.studentHighestMark("Java"));
 
         JPAUtil.checkData("select * from province");
         JPAUtil.checkData("select * from student");

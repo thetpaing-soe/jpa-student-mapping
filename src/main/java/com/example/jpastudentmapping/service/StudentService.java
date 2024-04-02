@@ -22,6 +22,10 @@ public class StudentService {
     private final StudentSubjectDao studentSubjectDao;
     private final SubjectDao subjectDao;
 
+    public Student studentHighestMark(String name) {
+        return subjectDao.findStudentHighestMark(name).get();
+    }
+
     public List<Student> studentByExample(Example<Student> studentExample) {
         return studentDao.findAll(studentExample);
     }

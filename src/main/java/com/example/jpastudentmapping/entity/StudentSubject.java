@@ -12,7 +12,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class StudentSubject extends IdClass {
 
-    private int mark;
+    private int marks;
 
     @ManyToOne
     private Student student;
@@ -20,7 +20,7 @@ public class StudentSubject extends IdClass {
     @ManyToOne
     private Subject subject;
 
-    public StudentSubject(int mark) {
-        this.mark = mark;
+    public StudentSubject(int marks) {
+        this.marks = marks;
     }
 }

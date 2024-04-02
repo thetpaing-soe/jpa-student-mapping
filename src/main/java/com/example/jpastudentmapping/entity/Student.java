@@ -37,4 +37,14 @@ public class Student extends IdClass {
         this.age = age;
         this.email = email;
     }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "name='" + name + '\'' +
+                ", age=" + age +
+                ", email='" + email + '\'' +
+                ", province=" + province.getProvinceName() +
+                '}';
+    }
 }

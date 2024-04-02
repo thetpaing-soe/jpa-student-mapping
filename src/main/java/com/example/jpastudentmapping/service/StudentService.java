@@ -4,13 +4,14 @@ import com.example.jpastudentmapping.dao.ProvinceDao;
 import com.example.jpastudentmapping.dao.StudentDao;
 import com.example.jpastudentmapping.dao.StudentSubjectDao;
 import com.example.jpastudentmapping.dao.SubjectDao;
-import com.example.jpastudentmapping.entity.Province;
-import com.example.jpastudentmapping.entity.Student;
-import com.example.jpastudentmapping.entity.StudentSubject;
-import com.example.jpastudentmapping.entity.Subject;
+import com.example.jpastudentmapping.entity.*;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -20,6 +21,30 @@ public class StudentService {
     private final StudentDao studentDao;
     private final StudentSubjectDao studentSubjectDao;
     private final SubjectDao subjectDao;
+
+    public List<Student> studentByExample(Example<Student> studentExample) {
+        return studentDao.findAll(studentExample);
+    }
+    public Student getStudentByNameCustom(String name) {
+        return studentDao.getStudentByName(name)
+                .orElseThrow(EntityNotFoundException::new);
+    }
+
+    public Student findByName(String name) {
+        return studentDao.getStudentFromNameV2(name).get();
+    }
+
+    public List<Student> findStudentHighestMarkBySubject(String subjectName) {
+        return studentDao.getStudentByHighestMarkBySubject(subjectName);
+    }
+
+    public int highestMark() {
+        return studentDao.findStudentByHighestMark().get();
+    }
+
+    public List<StudentInfo> findStudentInfo(String subjectName) {
+        return studentDao.findStudentInfo(subjectName);
+    }
 
     @Transactional
     public void createDb() {

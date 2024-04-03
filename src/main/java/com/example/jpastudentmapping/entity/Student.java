@@ -18,7 +18,7 @@ import java.util.List;
 public class Student extends IdClass {
 
     private String name;
-    private int age;
+    private Integer age;
     private String email;
 
     @ManyToOne

@@ -12,6 +12,13 @@ import java.util.Optional;
 public interface StudentDao extends JpaRepository<Student, Integer>, CustomStudentDao {
 
     @Query("""
+select s from Student s where s.name = :name or s.email = :name
+""")
+    Optional<Student> findStudentDynamic(@Param("name") String queryString);
+
+    Optional<Student> findByNameOrEmail(String name, String email);
+
+    @Query("""
 select new com.example.jpastudentmapping.entity.StudentInfo(
 p.provinceName, s.name, s.email, studsub.marks, sub.subjectName, sub.fees)
 from Province p join p.students s join s.studentSubjects studsub join studsub.subject sub

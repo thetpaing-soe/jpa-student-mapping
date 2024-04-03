@@ -8,6 +8,7 @@ import com.example.jpastudentmapping.entity.*;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,6 +22,30 @@ public class StudentService {
     private final StudentDao studentDao;
     private final StudentSubjectDao studentSubjectDao;
     private final SubjectDao subjectDao;
+
+    public List<Student> findStudentByExample(Object name) {
+
+        Student student = new Student();
+
+        student.setName(String.valueOf(name));
+        student.setEmail(String.valueOf(name));
+
+        if (name instanceof Integer age) {
+            student.setAge(age);
+        }
+
+        Example<Student> studentExample = Example.of(student, ExampleMatcher.matchingAny().withIgnoreCase());
+
+        return studentDao.findAll(studentExample);
+    }
+
+    public Student studentByNameConvention(String name, String email) {
+        return studentDao.findByNameOrEmail(name, email).get();
+    }
+
+    public Student studentDynamicQuery(String queryString) {
+        return studentDao.findStudentDynamic(queryString).get();
+    }
 
     public Student studentHighestMark(String name) {
         return subjectDao.findStudentHighestMark(name).get();
